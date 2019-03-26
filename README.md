@@ -24,3 +24,7 @@ Inside MapReduce(for the cloud):
 * reduce input: from (multiple) remote disks; uses local file systems
 * reduce output: to distributed file system
 * local file system: Linux, etc. distributed file system = GFS (Google File System), HDFS (Hadoop Distributed File System)
+
+
+
+
