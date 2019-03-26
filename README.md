@@ -24,8 +24,16 @@ Inside MapReduce(for the cloud):
 * reduce input: from (multiple) remote disks; uses local file systems
 * reduce output: to distributed file system
 * local file system: Linux, etc. distributed file system = GFS (Google File System), HDFS (Hadoop Distributed File System)
-<img width="685" alt="Screen Shot 2019-03-26 at 1 04 50 PM" src="https://user-images.githubusercontent.com/29927264/55017889-140d9a00-4fc8-11e9-96f4-a9da76b82871.png">
+<img width="400" alt="Screen Shot 2019-03-26 at 1 04 50 PM" src="https://user-images.githubusercontent.com/29927264/55017889-140d9a00-4fc8-11e9-96f4-a9da76b82871.png">
 
+#### The Yarn Scheduler
+* Used in Hadoop 2.x+
+* YARN = Yet Another Resource Negotiator
+* Treats each server as a collection of containers: container = some CPU + some memory 
+* Has 3 main components: <br>
+  1. Global Resource Manager (RM): Scheduling
+  2. Per-server Node Manager (NM): Daemon and server-specific functions
+  3. Per-application (job) Application Master (AM): Container negotiation with RM and NMs; Detecting task failures of that job
 
 
 
