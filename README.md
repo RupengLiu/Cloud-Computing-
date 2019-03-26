@@ -34,6 +34,7 @@ Inside MapReduce(for the cloud):
   1. Global Resource Manager (RM): Scheduling
   2. Per-server Node Manager (NM): Daemon and server-specific functions
   3. Per-application (job) Application Master (AM): Container negotiation with RM and NMs; Detecting task failures of that job
+<img width="350" alt="Screen Shot 2019-03-26 at 1 28 06 PM" src="https://user-images.githubusercontent.com/29927264/55019324-0dcced00-4fcb-11e9-9490-5603be8b2ac7.png">
 
 
 
