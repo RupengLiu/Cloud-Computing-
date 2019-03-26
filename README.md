@@ -36,5 +36,28 @@ Inside MapReduce(for the cloud):
   3. Per-application (job) Application Master (AM): Container negotiation with RM and NMs; Detecting task failures of that job
 <img width="350" alt="Screen Shot 2019-03-26 at 1 28 06 PM" src="https://user-images.githubusercontent.com/29927264/55019324-0dcced00-4fcb-11e9-9490-5603be8b2ac7.png">
 
+#### Fault Tolerance 
+1. Server Failure: NM heartbeats to RM: If server fails, RM lets all affected AMs know, and AMs take action; NM keeps track of each task running at its server: if task fails while in-progress. mark the task as idle and restart it; AM heartbeats to RM: On failure, RM restarts AM, which then syncs up with its running tasks
+2. RM Failure: Use old checkpoints and bring up secondary RM; Hearbeats also used to piggyback container requests， avoid extra messages
+
+#### Straggers (slow node)
+1. The slowest machine slows the entire job down, due to bad disk, network bandwidth, CPU, memory.
+2. Perform backup (replicated) execution of straggler task: task considered done when first replica complete. Called Speculative Execution.
+
+#### Locality
+Since Cloud has hierarchical topology, GFS/HDFS stores 3 replicas of each chunks: maybe on different racks: 2 on a rack, 1 on a different rack; MapReduce attempts to schedule a map task on: <br>
+  1. a machine that contains a replica of corresponding input data, or failing that
+  2. on the same rack as a mahcine containing the input, or failing that
+  3. anywhere
+  
+#### Summary 
+MapReduce uses parallelization + aggregation to schedule applications across cluster; need to deal with failure
+
+
+
+
+
+
+
 
 
