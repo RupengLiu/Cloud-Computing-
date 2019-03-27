@@ -66,7 +66,13 @@ scalablity: overhead of each node won't grow rapidly as number of nodes grows in
 #### Tree-based Multicast Protocol
 Protocols develop a spanning tree among the nodes or the process in the group. 
 
-This is designed to overcome the huge overhead of the centralized approach multicast (O(n) to send information to all other recipients, high latency and average time), then using balanced tree, the latency will become O(log(n)), also the sender's overhead will become constant since every node has constant number of children
+This is designed to overcome the huge overhead of the centralized approach multicast (O(n) to send information to all other recipients, high latency and average time), then using balanced tree, the latency will become O(log(n)), also the sender's overhead will become constant since every node has constant number of children. Node failure in tree struture may cause its all decendents failing, use either (ACKs) or (NAKs) to repair multicast not received (sent to the root)
+
+SRM (Scalable Reliable Multicast): use NAKs; adds random delays, and uses exponential backoff to avoid NAK storms: (So receivers when they realize they need to send out a NACK, they don't send out the NACK immediately. They wait for a little bit of time and then they send it out. If they need to send a NACK multiple times,then they might use an exponential backoff, meaning that they, wait for a period of time that doubles every time they wait. Also, the messages that are sent out might also be subject to exponential backoff)
+
+RMTP (Reliable Multicast Transport Protocol): use ACKs; But ACKs only sent to designated receivers, which then re-transmit missing multicasts; 
+
+NACKs and ACKs still grow linearly as the group size increase
 
 
 
