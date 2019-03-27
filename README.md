@@ -63,6 +63,17 @@ The multicast protocol typically sits at the application level, meaning that it 
 fault tolerance: nodes are failure prone, you want recipients receive their infomation
 scalablity: overhead of each node won't grow rapidly as number of nodes grows into the thousands
 
+#### Tree-based Multicast Protocol
+Protocols develop a spanning tree among the nodes or the process in the group. 
+
+This is designed to overcome the huge overhead of the centralized approach multicast (O(n) to send information to all other recipients, high latency and average time), then using balanced tree, the latency will become O(log(n)), also the sender's overhead will become constant since every node has constant number of children
+
+
+
+
+
+
+
 
 
 
