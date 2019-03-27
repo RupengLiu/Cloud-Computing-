@@ -54,8 +54,14 @@ Since Cloud has hierarchical topology, GFS/HDFS stores 3 replicas of each chunks
 MapReduce uses parallelization + aggregation to schedule applications across cluster; need to deal with failure
 
 
+### Multicast
+Within a particular group of nodes or group of processes, you have a piece of information that you want to send out the entire network where everyone, all the computers or all the nodes on the network want to receive that piece of information. 
 
+The multicast protocol typically sits at the application level, meaning that it does not deal with the underlying network. The application level multicast protocols also talk with the underlying network level, techniques such as IP multicast. IP multicast is what's available in the underlying network itself. This is implemented in routers and switches. It's not necessarily an attractive alternative because even though it's available it may not be enabled in many of the routers and switches, and so, most of the multicast protocols that are deployed out there today, even though some of them may leverage what-IP multicast where it's available, all of them, most of them today are application level, meaning that, they involve processes talking with each other, without really worrying about what's going on in the network underneath.
 
+#### The requirements of Multicast protocol: fault tolerance and scalability
+fault tolerance: nodes are failure prone, you want recipients receive their infomation
+scalablity: overhead of each node won't grow rapidly as number of nodes grows into the thousands
 
 
 
