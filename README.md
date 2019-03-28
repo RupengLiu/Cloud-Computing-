@@ -126,3 +126,9 @@ Use failure detector and dissemination mechanism to deal with process failure:
 
 <img width="494" alt="Screen Shot 2019-03-28 at 12 02 08 PM" src="https://user-images.githubusercontent.com/29927264/55172999-557d8100-5151-11e9-91d6-6b1689646327.png">
 
+### Distributed failure detectors desirable properties
+1. Completeness: each failure is detected 
+2. Accuracy: there is no mistaken detection
+3. Speed: Time to fisrt detection of a failure
+4. Scale: Equal Load on member; Network message load
+
