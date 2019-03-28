@@ -103,12 +103,20 @@ Node Failure: 50% of nodes fail (replace n with n/2 and b with b/2), take twice 
 
 If the initial sender dies or early receivers die, the epidemic will die out. But it will be very hard to stop the gossip once it spread several rounds.
 
-### Spread speed between pull and push model:
+### Spread speed between pull and push model
 <img width="425" alt="Screen Shot 2019-03-28 at 10 47 40 AM" src="https://user-images.githubusercontent.com/29927264/55167231-f0bd2900-5146-11e9-9df6-3a2b6bda22c7.png">
 
 ### Topology-aware Gossip
 <img width="500" alt="Screen Shot 2019-03-28 at 11 19 05 AM" src="https://user-images.githubusercontent.com/29927264/55169543-58757300-514b-11e9-8e43-c78db5c11299.png">
  
+### Examples use Gossip Protocol
+Cassandra key-value store: use gossip for maintaining membership; Usenet NNTP; Sensor networks
+
+## Group Membership List
+Used to maintain the list of most or all of the other processes that are currently in your system and that have not yet failed.
+One biggest challenge is that this membership protocol has to communicate with the unreliabe communication medium which can drop packets, delay packets quite a bit. 
+<img width="425" alt="Screen Shot 2019-03-28 at 11 51 54 AM" src="https://user-images.githubusercontent.com/29927264/55172131-eb181100-514f-11e9-8781-0473ae0be5f4.png">
+<img width="400" alt="Screen Shot 2019-03-28 at 11 57 48 AM" src="https://user-images.githubusercontent.com/29927264/55172638-bb1d3d80-5150-11e9-9bb6-a9e73587ba06.png">
 
 
 
