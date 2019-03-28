@@ -119,7 +119,10 @@ One biggest challenge is that this membership protocol has to communicate with t
 <img width="425" alt="Screen Shot 2019-03-28 at 11 51 54 AM" src="https://user-images.githubusercontent.com/29927264/55172131-eb181100-514f-11e9-8781-0473ae0be5f4.png">
 
 Three kinds of membership list style: complete; almost-complete; partial-random:
+
 <img width="400" alt="Screen Shot 2019-03-28 at 11 57 48 AM" src="https://user-images.githubusercontent.com/29927264/55172638-bb1d3d80-5150-11e9-9bb6-a9e73587ba06.png">
 
+Use failure detector and dissemination mechanism to deal with process failure: 
 
+<img width="494" alt="Screen Shot 2019-03-28 at 12 02 08 PM" src="https://user-images.githubusercontent.com/29927264/55172999-557d8100-5151-11e9-91d6-6b1689646327.png">
 
