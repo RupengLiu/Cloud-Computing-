@@ -85,13 +85,12 @@ Pull gossip: Periodically ask and poll a few randomly selected processes for new
 
 Hybrid variant: Push-Pull model
 
-### Pull based gossip protocol
+### Push based gossip protocol
 1. Is lightweight in large groups
 2. spreads a multicast quickly
 3. is highly fault-tolerant
 
-
-
+Analysis: population of (n+1), cantact rate beta, x (uninfected), y (infected)
 
 
 
