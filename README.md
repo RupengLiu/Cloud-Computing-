@@ -144,12 +144,35 @@ Each process sends out heartbeats to all the other processes.
 Equal load per member. Also, the protocol is complete. It can detect all process failures. 
 However, if there is a slow server, it may delay the heartbeat and mark all other servers as failed. The rate of false positive will be high. 
 <img width="590" alt="Screen Shot 2019-03-28 at 1 48 55 PM" src="https://user-images.githubusercontent.com/29927264/55180592-40f4b500-5160-11e9-9a92-d41de0ae4a6d.png">
-If the heartbeat has not increased for more than T(fail) seconds, the member is considered failed;
+
+If the heartbeat has not increased for more than T(fail) seconds, the member is considered failed; And the member is deleted from the list after T(cleanup) seconds. 
 
 In gossip-style failure detection, we shouldn't delete the entry right after it's detected as failed. Since other process may not have deleted that entry and it may be added back. 
 <img width="600" alt="Screen Shot 2019-03-28 at 1 57 06 PM" src="https://user-images.githubusercontent.com/29927264/55181126-6c2bd400-5161-11e9-8537-5c1aef3baedf.png">
 
+If T(fail) and T(cleanup) increased, the fasle positive rate decreases, the detection time increases, and bandwidth required is less. 
 
+<img width="492" alt="Screen Shot 2019-03-28 at 2 02 38 PM" src="https://user-images.githubusercontent.com/29927264/55181505-2b808a80-5162-11e9-9bc5-25a548df3e32.png">
+
+### All-to-All heartbeating vs Gossip heartbeating
+The All-to-All heartbeating model:
+<img width="560" alt="Screen Shot 2019-03-28 at 2 12 21 PM" src="https://user-images.githubusercontent.com/29927264/55182220-97afbe00-5163-11e9-87bc-a47389c94e03.png">
+
+The Gossip heartbeating model:
+<img width="644" alt="Screen Shot 2019-03-28 at 2 12 32 PM" src="https://user-images.githubusercontent.com/29927264/55182221-98485480-5163-11e9-8cf3-0f70a44c591e.png">
+
+Noticed that gossip-based heartbeating has a higher load than the all-to-all heartbeating, but it has a slightly better accuracy by using more messages. 
+
+### SWIM Failure detector protocol 
+Process pi runs the following protocol, which runs periodically every T prime time units, that's called the Protocol period. The beginning of the Protocol period it picks one other process at random, wa-call that process pj, and sends it a ping message. If the process pj receives a ping messages, it responds back with a ack message immediately. If pi receives this ack then, it does nothing else for the remainder of the Protocol period, it's satisfied. However, if it does not hear back an acknowledgement, which might happen if the acknowledgement is dropped or the original ping is dropped. Then, it tries to ping pj again, but, instead of using the direct path, it uses indirect path. It does this by sending indirect pings to K other randomly selected processes. This, third process is one of them. When it receives this indirect ping, it then sends a direct ping, uh, to pj, which responds back with an acknowledgement, and then, uh, a direct acknowledgement, and then the third process sends an indirect acknowledgement back to pi. If pi receives at least one such indirect acknowledgement, by the end of the protocol, uh, period, uh, then, uh, it is happy and is satisfied. If it does not receive either, direct acknowledgement from the beginning or any indirect acknowledgements then, it marks pj as having failed.
+
+<img width="670" alt="Screen Shot 2019-03-28 at 2 24 04 PM" src="https://user-images.githubusercontent.com/29927264/55182954-2cff8200-5165-11e9-93d0-18d08dff9af2.png">
+
+<img width="425" alt="Screen Shot 2019-03-28 at 2 40 26 PM" src="https://user-images.githubusercontent.com/29927264/55184009-7b158500-5167-11e9-888e-93f422967ea8.png">
+
+#SWIM vs. Heartbeating
+
+<img width="653" alt="Screen Shot 2019-03-28 at 2 37 49 PM" src="https://user-images.githubusercontent.com/29927264/55183834-178b5780-5167-11e9-84b9-ff2f551fad01.png">
 
 
 
