@@ -172,6 +172,8 @@ Process pi runs the following protocol, which runs periodically every T prime ti
 
 <img width="400" alt="Screen Shot 2019-03-28 at 2 44 15 PM" src="https://user-images.githubusercontent.com/29927264/55184216-faa35400-5167-11e9-982a-a77d69f74f76.png">
 
+<img width="391" alt="Screen Shot 2019-03-28 at 3 07 31 PM" src="https://user-images.githubusercontent.com/29927264/55185662-3d1a6000-516b-11e9-99eb-37ed406d64b9.png">
+
 #SWIM vs. Heartbeating
 
 <img width="550" alt="Screen Shot 2019-03-28 at 2 37 49 PM" src="https://user-images.githubusercontent.com/29927264/55183834-178b5780-5167-11e9-84b9-ff2f551fad01.png">
