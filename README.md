@@ -115,6 +115,7 @@ Cassandra key-value store: use gossip for maintaining membership; Usenet NNTP; S
 ## Group Membership List
 Used to maintain the list of most or all of the other processes that are currently in your system and that have not yet failed.
 One biggest challenge is that this membership protocol has to communicate with the unreliabe communication medium which can drop packets, delay packets quite a bit. 
+
 <img width="425" alt="Screen Shot 2019-03-28 at 11 51 54 AM" src="https://user-images.githubusercontent.com/29927264/55172131-eb181100-514f-11e9-8781-0473ae0be5f4.png">
 <img width="400" alt="Screen Shot 2019-03-28 at 11 57 48 AM" src="https://user-images.githubusercontent.com/29927264/55172638-bb1d3d80-5150-11e9-9bb6-a9e73587ba06.png">
 
