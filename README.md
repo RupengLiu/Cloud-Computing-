@@ -159,20 +159,22 @@ The All-to-All heartbeating model:
 <img width="560" alt="Screen Shot 2019-03-28 at 2 12 21 PM" src="https://user-images.githubusercontent.com/29927264/55182220-97afbe00-5163-11e9-87bc-a47389c94e03.png">
 
 The Gossip heartbeating model:
-<img width="644" alt="Screen Shot 2019-03-28 at 2 12 32 PM" src="https://user-images.githubusercontent.com/29927264/55182221-98485480-5163-11e9-8cf3-0f70a44c591e.png">
+<img width="560" alt="Screen Shot 2019-03-28 at 2 12 32 PM" src="https://user-images.githubusercontent.com/29927264/55182221-98485480-5163-11e9-8cf3-0f70a44c591e.png">
 
 Noticed that gossip-based heartbeating has a higher load than the all-to-all heartbeating, but it has a slightly better accuracy by using more messages. 
 
 ### SWIM Failure detector protocol 
 Process pi runs the following protocol, which runs periodically every T prime time units, that's called the Protocol period. The beginning of the Protocol period it picks one other process at random, wa-call that process pj, and sends it a ping message. If the process pj receives a ping messages, it responds back with a ack message immediately. If pi receives this ack then, it does nothing else for the remainder of the Protocol period, it's satisfied. However, if it does not hear back an acknowledgement, which might happen if the acknowledgement is dropped or the original ping is dropped. Then, it tries to ping pj again, but, instead of using the direct path, it uses indirect path. It does this by sending indirect pings to K other randomly selected processes. This, third process is one of them. When it receives this indirect ping, it then sends a direct ping, uh, to pj, which responds back with an acknowledgement, and then, uh, a direct acknowledgement, and then the third process sends an indirect acknowledgement back to pi. If pi receives at least one such indirect acknowledgement, by the end of the protocol, uh, period, uh, then, uh, it is happy and is satisfied. If it does not receive either, direct acknowledgement from the beginning or any indirect acknowledgements then, it marks pj as having failed.
 
-<img width="670" alt="Screen Shot 2019-03-28 at 2 24 04 PM" src="https://user-images.githubusercontent.com/29927264/55182954-2cff8200-5165-11e9-93d0-18d08dff9af2.png">
+<img width="550" alt="Screen Shot 2019-03-28 at 2 24 04 PM" src="https://user-images.githubusercontent.com/29927264/55182954-2cff8200-5165-11e9-93d0-18d08dff9af2.png">
 
-<img width="425" alt="Screen Shot 2019-03-28 at 2 40 26 PM" src="https://user-images.githubusercontent.com/29927264/55184009-7b158500-5167-11e9-888e-93f422967ea8.png">
+<img width="400" alt="Screen Shot 2019-03-28 at 2 40 26 PM" src="https://user-images.githubusercontent.com/29927264/55184009-7b158500-5167-11e9-888e-93f422967ea8.png">
+
+<img width="400" alt="Screen Shot 2019-03-28 at 2 44 15 PM" src="https://user-images.githubusercontent.com/29927264/55184216-faa35400-5167-11e9-982a-a77d69f74f76.png">
 
 #SWIM vs. Heartbeating
 
-<img width="653" alt="Screen Shot 2019-03-28 at 2 37 49 PM" src="https://user-images.githubusercontent.com/29927264/55183834-178b5780-5167-11e9-84b9-ff2f551fad01.png">
+<img width="550" alt="Screen Shot 2019-03-28 at 2 37 49 PM" src="https://user-images.githubusercontent.com/29927264/55183834-178b5780-5167-11e9-84b9-ff2f551fad01.png">
 
 
 
