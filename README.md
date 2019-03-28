@@ -97,6 +97,18 @@ Analysis: population of (n+1), cantact rate beta, x (uninfected), y (infected)
 
 <img width="380" alt="Screen Shot 2019-03-28 at 10 23 19 AM" src="https://user-images.githubusercontent.com/29927264/55165284-88207d00-5143-11e9-8fdd-a8f4863d5b18.png">
 
+#### Fault-tolerance of Push-based gossip protocol
+Packet loss: if 50% packet loss (replace b with b/2), to achieve same reliability as 0% packet loss, take twice as many rounds
+Node Failure: 50% of nodes fail (replace n with n/2 and b with b/2), take twice as many rounds
+
+If the initial sender dies or early receivers die, the epidemic will die out. But it will be very hard to stop the gossip once it spread several rounds.
+
+### Spread speed between pull and push model:
+<img width="475" alt="Screen Shot 2019-03-28 at 10 47 40 AM" src="https://user-images.githubusercontent.com/29927264/55167231-f0bd2900-5146-11e9-9df6-3a2b6bda22c7.png">
+
+### Topology-aware Gossip
+<img width="475" alt="Screen Shot 2019-03-28 at 11 19 05 AM" src="https://user-images.githubusercontent.com/29927264/55169543-58757300-514b-11e9-8e43-c78db5c11299.png">
+ 
 
 
 
