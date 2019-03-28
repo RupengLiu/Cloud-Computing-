@@ -91,9 +91,11 @@ Hybrid variant: Push-Pull model
 3. is highly fault-tolerant
 
 Analysis: population of (n+1), cantact rate beta, x (uninfected), y (infected)
+<img width="350" alt="Screen Shot 2019-03-28 at 10 17 04 AM" src="https://user-images.githubusercontent.com/29927264/55164876-d3865b80-5142-11e9-9e3a-c8d7ccc1e50c.png">
 
+<img width="350" alt="Screen Shot 2019-03-28 at 10 19 43 AM" src="https://user-images.githubusercontent.com/29927264/55165030-0b8d9e80-5143-11e9-87c1-47fdbca3d961.png">
 
-
+<img width="380" alt="Screen Shot 2019-03-28 at 10 23 19 AM" src="https://user-images.githubusercontent.com/29927264/55165284-88207d00-5143-11e9-8fdd-a8f4863d5b18.png">
 
 
 
