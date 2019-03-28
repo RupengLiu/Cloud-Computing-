@@ -132,3 +132,26 @@ Use failure detector and dissemination mechanism to deal with process failure:
 3. Speed: Time to fisrt detection of a failure
 4. Scale: Equal Load on member; Network message load
 
+### Centralized Heartbeating to detect process failure
+Every process periodically send heartbeat to a server (Pj), if there is no heartbeat from the server, then it is notified as failed. However, when Pj failed, there will be no gurantee to detect the failure. Also, if the proxy group is large, Pj may overloaded with failure messages. 
+
+### Ring Heartbeating
+All processes are organized in a virtual ring. And every process sends heartbeats to at least one of its neighbors.
+If you have multiple failures, you may have some failures go undetected. 
+
+### All-to-All heartbeating
+Each process sends out heartbeats to all the other processes.
+Equal load per member. Also, the protocol is complete. It can detect all process failures. 
+However, if there is a slow server, it may delay the heartbeat and mark all other servers as failed. The rate of false positive will be high. 
+<img width="590" alt="Screen Shot 2019-03-28 at 1 48 55 PM" src="https://user-images.githubusercontent.com/29927264/55180592-40f4b500-5160-11e9-9a92-d41de0ae4a6d.png">
+If the heartbeat has not increased for more than T(fail) seconds, the member is considered failed;
+
+In gossip-style failure detection, we shouldn't delete the entry right after it's detected as failed. Since other process may not have deleted that entry and it may be added back. 
+<img width="600" alt="Screen Shot 2019-03-28 at 1 57 06 PM" src="https://user-images.githubusercontent.com/29927264/55181126-6c2bd400-5161-11e9-8537-5c1aef3baedf.png">
+
+
+
+
+
+
+
