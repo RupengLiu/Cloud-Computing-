@@ -74,6 +74,22 @@ RMTP (Reliable Multicast Transport Protocol): use ACKs; But ACKs only sent to de
 
 NACKs and ACKs still grow linearly as the group size increase
 
+## Gossip Protocol
+Each Node periodically transmit to b random target using gossip messages (UDP), others do the same after receiving multicast
+
+### Push vs. Pull
+
+Push gossip: once you have a multicast message, you start gossiping about it; gossip a random subset of them, or recently-received ones, or higher priority ones
+
+Pull gossip: Periodically ask and poll a few randomly selected processes for new multicast messages that you haven't received
+
+Hybrid variant: Push-Pull model
+
+### Pull based gossip protocol
+1. Is lightweight in large groups
+2. spreads a multicast quickly
+3. is highly fault-tolerant
+
 
 
 
