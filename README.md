@@ -178,6 +178,13 @@ Process pi runs the following protocol, which runs periodically every T prime ti
 
 <img width="550" alt="Screen Shot 2019-03-28 at 2 37 49 PM" src="https://user-images.githubusercontent.com/29927264/55183834-178b5780-5167-11e9-84b9-ff2f551fad01.png">
 
+### Dissemination and Suspicion
+Dissemination options: 
+1. Multicast (Hardware / IP): unreliable; multiple simulataneous 
+2. Point-to-Point (TCP/UDP): expensive 
+3. Zero extra messages: Piggyback on Failure Detector messages
+
+
 
 
 
