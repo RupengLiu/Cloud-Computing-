@@ -186,15 +186,23 @@ Dissemination options:
 
 <img width="500" alt="Screen Shot 2019-03-28 at 9 30 43 PM" src="https://user-images.githubusercontent.com/29927264/55203154-d2841700-51a0-11e9-928a-31dcde70b179.png">
 
- ### Suspicion mechanism:
+### Suspicion mechanism:
  1. False Detections, due to: Perturbed processes, Packet losses, e.g., from congestion
  2. Indirect pinging may not solve the problem: e.g., correlated message losses near pinged host
  3. Key: suspect a process before declaring it as failed in the group
  
- <img width="600" alt="Screen Shot 2019-03-28 at 9 46 11 PM" src="https://user-images.githubusercontent.com/29927264/55203765-f0527b80-51a2-11e9-80fd-b23d59090330.png">
+<img width="600" alt="Screen Shot 2019-03-28 at 9 46 11 PM" src="https://user-images.githubusercontent.com/29927264/55203765-f0527b80-51a2-11e9-80fd-b23d59090330.png">
 
 <img width="350" alt="Screen Shot 2019-03-28 at 9 56 22 PM" src="https://user-images.githubusercontent.com/29927264/55204164-58ee2800-51a4-11e9-8515-8b5644411699.png">
  
+Failures the norm, not the exception in datacenters; Every distributed system uses a failure detector; Many distributed systems uses a membership service;
+
+Ring failure detection underlies(IBM SP2 and many other similar cluster/machines)
+Gossip-style failure detection underlies(Amazon EC2/S3)
+ 
+## Grid Computing
+
+### Grid Application
  
  
  
