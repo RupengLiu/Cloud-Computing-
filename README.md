@@ -227,7 +227,7 @@ Gossip-style failure detection underlies(Amazon EC2/S3)
 * Client act as servers too, called servents
 * Originial design underwent several modifications 
 
-<img width="400" alt="Screen Shot 2019-04-01 at 6 09 38 PM" src="https://user-images.githubusercontent.com/29927264/55362872-5859d800-54a9-11e9-86dc-f7d2a457053c.png"> <img width="400" alt="Screen Shot 2019-04-01 at 6 11 23 PM" src="https://user-images.githubusercontent.com/29927264/55362967-93f4a200-54a9-11e9-9ffc-72d27d646c31.png">
+<img width="350" alt="Screen Shot 2019-04-01 at 6 09 38 PM" src="https://user-images.githubusercontent.com/29927264/55362872-5859d800-54a9-11e9-86dc-f7d2a457053c.png"> <img width="350" alt="Screen Shot 2019-04-01 at 6 11 23 PM" src="https://user-images.githubusercontent.com/29927264/55362967-93f4a200-54a9-11e9-9ffc-72d27d646c31.png">
  
  
  
