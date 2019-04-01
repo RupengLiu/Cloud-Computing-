@@ -191,7 +191,7 @@ Dissemination options:
  2. Indirect pinging may not solve the problem: e.g., correlated message losses near pinged host
  3. Key: suspect a process before declaring it as failed in the group
  
-<img width="600" alt="Screen Shot 2019-03-28 at 9 46 11 PM" src="https://user-images.githubusercontent.com/29927264/55203765-f0527b80-51a2-11e9-80fd-b23d59090330.png">
+<img width="500" alt="Screen Shot 2019-03-28 at 9 46 11 PM" src="https://user-images.githubusercontent.com/29927264/55203765-f0527b80-51a2-11e9-80fd-b23d59090330.png">
 
 <img width="350" alt="Screen Shot 2019-03-28 at 9 56 22 PM" src="https://user-images.githubusercontent.com/29927264/55204164-58ee2800-51a4-11e9-8515-8b5644411699.png">
  
@@ -200,13 +200,14 @@ Failures the norm, not the exception in datacenters; Every distributed system us
 Ring failure detection underlies(IBM SP2 and many other similar cluster/machines)
 Gossip-style failure detection underlies(Amazon EC2/S3)
  
-## Grid Computing
-
-### Grid Application
- 
- 
- 
- 
+## P2P System
+### Napster 
+ <img width="400" alt="Screen Shot 2019-04-01 at 4 46 58 PM" src="https://user-images.githubusercontent.com/29927264/55358611-d1533280-549d-11e9-97c4-cf610f82113a.png">
+### Client
+1. Connect to Napster server: upload list of music files that you want to share; Server maintains list of <filename, ip_address, portnum> tuples. Server stores no files.
+2. Search: send server keywords to search with, server search its list with keywords, server returns a list of hosts <ip_address, portnum> tuples to client, client pings each host in the list to find transfer rates, client fetches file from best host
+3. All communication uses TCP, since it's reliable and ordered networking protocol. 
+<img width="430" alt="Screen Shot 2019-04-01 at 5 48 49 PM" src="https://user-images.githubusercontent.com/29927264/55361870-6a864700-54a6-11e9-892e-30d08988d484.png">
  
  
  
