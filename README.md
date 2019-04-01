@@ -203,18 +203,32 @@ Gossip-style failure detection underlies(Amazon EC2/S3)
 ## P2P System
 ### Napster 
  <img width="400" alt="Screen Shot 2019-04-01 at 4 46 58 PM" src="https://user-images.githubusercontent.com/29927264/55358611-d1533280-549d-11e9-97c4-cf610f82113a.png">
-### Client
+
+#### Client
 1. Connect to Napster server: upload list of music files that you want to share; Server maintains list of <filename, ip_address, portnum> tuples. Server stores no files.
 2. Search: send server keywords to search with, server search its list with keywords, server returns a list of hosts <ip_address, portnum> tuples to client, client pings each host in the list to find transfer rates, client fetches file from best host
 3. All communication uses TCP, since it's reliable and ordered networking protocol. 
 <img width="430" alt="Screen Shot 2019-04-01 at 5 48 49 PM" src="https://user-images.githubusercontent.com/29927264/55361870-6a864700-54a6-11e9-892e-30d08988d484.png">
+* server use ternary tree algorithm to search their lists, ternary tree is a sorted dictionary. 
  
+#### Join a P2P system
+1. send an http request to well-know url for that P2P service
+2. Messages routed (after lookup in DNS=Domain Name system) to introducer, a well known server that keeps track of some recently joined nodes in p2p system
+3. Introducer initializes new peers' neigjbor table
  
- 
- 
- 
- 
- 
+#### Problems for Napster System
+* Centralzied server a source of congestion
+* Centralized server single point of failure
+* No security: plaintext messages and passwords
+
+### Gnutella
+* Eliminate the servers
+* Client machines search and retrieve amongst themsevlves
+* Client act as servers too, called servents
+* Originial design underwent several modifications 
+
+<img width="400" alt="Screen Shot 2019-04-01 at 6 09 38 PM" src="https://user-images.githubusercontent.com/29927264/55362872-5859d800-54a9-11e9-86dc-f7d2a457053c.png">
+<img width="494" alt="Screen Shot 2019-04-01 at 6 11 23 PM" src="https://user-images.githubusercontent.com/29927264/55362967-93f4a200-54a9-11e9-9ffc-72d27d646c31.png">
  
  
  
