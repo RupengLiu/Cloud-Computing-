@@ -227,9 +227,39 @@ Gossip-style failure detection underlies(Amazon EC2/S3)
 * Client act as servers too, called servents
 * Originial design underwent several modifications 
 
-<img width="350" alt="Screen Shot 2019-04-01 at 6 09 38 PM" src="https://user-images.githubusercontent.com/29927264/55362872-5859d800-54a9-11e9-86dc-f7d2a457053c.png"> <img width="420" alt="Screen Shot 2019-04-01 at 6 11 23 PM" src="https://user-images.githubusercontent.com/29927264/55362967-93f4a200-54a9-11e9-9ffc-72d27d646c31.png">
+<img width="350" alt="Screen Shot 2019-04-01 at 6 09 38 PM" src="https://user-images.githubusercontent.com/29927264/55362872-5859d800-54a9-11e9-86dc-f7d2a457053c.png"> <img width="460" alt="Screen Shot 2019-04-01 at 6 11 23 PM" src="https://user-images.githubusercontent.com/29927264/55362967-93f4a200-54a9-11e9-9ffc-72d27d646c31.png">
  
- 
+#### Avoid excessive traffic in Gnutella searching
+
+* Each peer maintains a list of recently received messages
+* Query forwarded to all neighbors except peer from which received
+* Each Query (identified by DescriptionID) forwarded only once 
+* QueryHit routed back only to peer from which Query received with same DescriptorID
+* For flooded messages, duplicates with same DescriptorID and Payload descriptor are dropped
+* QueryHit with DescriptorID for which Query not seen is dropped
+
+#### After receiving QueryHit messages
+
+<img width="413" alt="Screen Shot 2019-04-01 at 6 23 34 PM" src="https://user-images.githubusercontent.com/29927264/55363505-44af7100-54ab-11e9-952b-4c2213e5dc06.png">
+
+#### Dealing with firewall && Push request
+
+Firewall can prevent information for getting in, but can't prevent it from going out.
+<img width="500" alt="Screen Shot 2019-04-01 at 6 26 33 PM" src="https://user-images.githubusercontent.com/29927264/55363636-af60ac80-54ab-11e9-9eaa-033b437b85ce.png">
+<img width="413" alt="Screen Shot 2019-04-01 at 6 28 53 PM" src="https://user-images.githubusercontent.com/29927264/55363731-023a6400-54ac-11e9-98c3-ded9a70e8a39.png"><img width="413" alt="Screen Shot 2019-04-01 at 6 30 21 PM" src="https://user-images.githubusercontent.com/29927264/55363783-36ae2000-54ac-11e9-83ba-0fdef13e6834.png">
+If the responder is behind a firewall, requestor can not make it way to responder. We use Push messages. Gnutella uses its overlay links themselves, these edges in the overlay are already set up, they are already set up TCP connections among the peers. So you can route whatever messages you want using these links, and so that's what the Gnutella requesting peer does.
+
+
+
+
+
+
+
+
+
+
+
+
  
  
  
