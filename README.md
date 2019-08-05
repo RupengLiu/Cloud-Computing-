@@ -252,10 +252,11 @@ Firewall can prevent information for getting in, but can't prevent it from going
 If the responder is behind a firewall, requestor can not make it way to responder. We use Push messages. Gnutella uses its overlay links themselves, these edges in the overlay are already set up, they are already set up TCP connections among the peers. So you can route whatever messages you want using these links, and so that's what the Gnutella requesting peer does.
 
 
+###Chord
 
-
-
-
+#### Distributed Hash Table
+ 
+ 
 
 
 
