@@ -245,8 +245,10 @@ Gossip-style failure detection underlies(Amazon EC2/S3)
 #### Dealing with firewall && Push request
 
 Firewall can prevent information for getting in, but can't prevent it from going out.
+
 <img width="500" alt="Screen Shot 2019-04-01 at 6 26 33 PM" src="https://user-images.githubusercontent.com/29927264/55363636-af60ac80-54ab-11e9-9eaa-033b437b85ce.png">
 <img width="413" alt="Screen Shot 2019-04-01 at 6 28 53 PM" src="https://user-images.githubusercontent.com/29927264/55363731-023a6400-54ac-11e9-98c3-ded9a70e8a39.png"><img width="413" alt="Screen Shot 2019-04-01 at 6 30 21 PM" src="https://user-images.githubusercontent.com/29927264/55363783-36ae2000-54ac-11e9-83ba-0fdef13e6834.png">
+
 If the responder is behind a firewall, requestor can not make it way to responder. We use Push messages. Gnutella uses its overlay links themselves, these edges in the overlay are already set up, they are already set up TCP connections among the peers. So you can route whatever messages you want using these links, and so that's what the Gnutella requesting peer does.
 
 
