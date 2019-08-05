@@ -251,12 +251,270 @@ Firewall can prevent information for getting in, but can't prevent it from going
 
 If the responder is behind a firewall, requestor can not make it way to responder. We use Push messages. Gnutella uses its overlay links themselves, these edges in the overlay are already set up, they are already set up TCP connections among the peers. So you can route whatever messages you want using these links, and so that's what the Gnutella requesting peer does.
 
+#### FAST-TRACK:
+ - Hybrid between Gnutella & Napster
+ - Takes advantage of healthier participants in the system
+ - Underlying technology in Kazaa, kazaalite, grokster
+ - proprietary protocol, but some details availble
+ - Like Gnutella, but with some peers designated as SUPERNODES
+  - super nodes stores a dir listing a subset of nearby (<file name, peer pointer>), similar to Napster server
+  - super node membership changes overtime
+  - Any peer can become & stay a supernode, provided it has earned enough REPUTATION:
+   - Kazaalite: participation level (=reputation) of a user between 0 & 1000, initially 10, then affected by length of period of connectivity & total# of uploads
+   - More sophisticated Reputation schemes invented, esp based on economics (p2pEcon workshop)
+  - A peer searches by contacting a nearby supernode // results in low n/w traffic 
+  
+#### BIT-TORRENT:
+ - Incentivises peers to participate in the system
+ - Notion of TRACKERS - one tracker per file
+ - peer wanting to join finds the tracker - '.torrent' file
+ - tracker maintains a list of some of the peers currently transferring that file // it does so by recving HB from peers
+ - peers are of 2 types:
+  - seeds // have full file
+  - leecher // have some blobs from the file
+ - file is typically split into blobs of 32KB-256KB
+ - 'download LOCAL RAREST FIRST block' policy: prefer early to download of blocks that are least replicated among neighbors
+  - Exception: new node allowed to pick one random neighbor, helps in bootstrapping
+ - Tit-for-tat BW usage: provide blocks to neighbors that provided it the best download rates
+  - Incentives for nodes to provide good download rates
+  - seeds do the same
+ - Choking: Limit # of nighbors to which concurrent uploads <= x (say x=5) ie the best neighbors
+  - everyone else choked
+  - periodically re-evaluate it (eg 10 sec)
+  - Optimistic unchoke: periodically (eg 30 sec), unchoke a random neighbor // helps keep unchoked set fresh
+   
+  
+#### DHT - Distributed Hash Table  
+ - A hash table allows u to insert/lookup/delete objects with keys - in O(1)
+ - A DISTRIBUTED hash table allow u to do the same in a distributed setting (objects=files)
+  - instead of storing objects in bucks, it stores files on different nodes
+ - Performance concerns:
+  - Load balancing    // of nodes
+  - Fault tolerance    // node failures
+  - Efficiency of lookups/inserts
+  - Locality      // msgs preferably t/f between near nodes
+ - Napster, Gnutella, FastTrack are all DHTs (of sort)
+ - So, is chord, a structured p2p system 
 
-###Chord
 
-#### Distributed Hash Table
+
+Comparative performance:
+
+ ------------------------------------------------------------------
+ Implementation  Memory     Lookup Latency     #msgs for lookup
+ ------------------------------------------------------------------
+ Napster   O(1) @client  O(1)    O(1)
+     O(N) @server
+    
+ Gnutella  O(N)    O(N)    O(N)
+
+ Chord   O(logN)    O(logN)    O(logN)
+ ------------------------------------------------------------------
+ In Napster, server stores info about all N clients
+
+
+#### Chord:
+ - Developed at Berkley & MIT
+ - Intelligent choice of neighbhors to reduce latency and message cost of routing (look/inserts)
+  - Gnutella decides neighbors on the basis on no of bytes shared
+ - Uses consistent hashing on node's (peer's) address
+  - SHA-1 (ip:port) -> 160 bit string // key-value
+   - SHA-1 - Secure Hash Algorithm, a well known hashing algorithm.
+   - O/p here is 160 bit string
+  - Truncated to m bits
+   - called peer-id (number b/w 0 - (2^m -1) )
+  - Not unique but id conflicts very unlikely
+  - can then map peers to one of the 2^m logical points on the circle
+ - Peer pointer 
+  - SUCCESSOR:
+   - Every nodes keeps pointer of the next element (when put on a circle) 
+   - can directly send msg to it
+  - FINGER TABLES:
+   - ith entry at peer with id n is 1st peer with id >= (n + 2^i) mod 2^m
+   - For eg, for n=80, m=7, ith peer, 2^m = 128
+    - 0th = (80 + 2^0) mod 128 = 80 + 1 = 81 (since next peer id>81 = 96, the 0th finger table entry will be 96)
+    - 1st = (80 + 2^1) mod 128 = 80 + 2 = 82 (since next peer id>82 = 96, the 0th finger table entry will be 96)
+    - 2nd = (80 + 2^2) mod 128 = 80 + 4 = 86    (since next peer id>84 = 96, the 0th finger table entry will be 96)
+    
+    
+What about the files?
+ - So that's how we place nodes on the ring, but how we place the files?
+ - File names also hashed using same consistent hash function
+  - SHA-1(filename) -> 160 bit string (key)
+  - File is stored at 1st peer with id >= its key(mod 2^m)
+   - eg File cnn.com/index.html that maps to key K42 is stored at 1st peer with id > 42
+   - Note that we are considering a different file-sharing application here:  COOPERATIVE WEB CACHING // where client browsers at different nodes share search results with each other
+   - The same discussion applies to any other file sharing application, including that of mp3 files
+  - CONSISTENT HASHING => with K keys & N peers, each peer stores O(K/N) keys (ie <c.K/N, for some constant c) 
+  
+Search:
+ - say, given points (nodes) on circle - N16, N32, N45, N80, N96, N112 & m =7
+ - Now say N80 wants to search for 'cnn.com/index.html', it 1st hashes it (say to K42)
+ - the next node near to 42 is N45 has the file
+ - If it doesn;t have the file, then N80 fwds (via RPC) its request to its successor ie N96 which does the same thing
+  - this helps if say N80 had some error in its finger table entry, N96 will save it.
+  
+Analysis:
+ - The search algo takes O(logN) time
+  // assuming successor and finger table entry info is correct/updated
+ - Proof:
+  - (intuition): at each step, distance between query & peer-with-file reduces by a factor of at least 2
+  
+Failures in chord:
+ - Peers fail
+  - Search under peer failures
+   - Sol: maintain r multiple successors entries. In case of failure, use successor entries.
+   - choosing r=2log(N) suffices to maintain lookup correctness (ie ring remains connected) with high probability
+  - what if the node holding the copy fails?
+   - sol: replicate the files @1 successor & predecessors
+   - this helps in load balancing as well, since multiple nodes can now fulfill the request 
+ - Peers join/leave
+  - this is aka CHURN
+  - p2p systems have high rate of churn
+   - 25% per hour in Overnet (eDonkey)
+   - 100% per hour in Gnutella
+   - Lower in managed clusters
+   - common feature in all distributed systems, incl wide area (eg planet lab), clusters ( eg Emulab), clouds (AWS) etc
+ - So, all the time update successors & fingers & copy keys
+
+
+New peers joining:
+ - say, queue is N16, N32, N45, N80, N96, N112 & N40 is the new node to join
+ - N40 contacts the introducer of the group (remember from assignment ?)
+ - introducer redirects it to N45 (& N32)
+ - N32 updates successor to N40
+ - N40 initializes successor to N45, and inits fingers from it
+ - N40 periodically talks to neighbors to update finger table // a stablization runs at each node, asking neighbor nodes for their finger tables to correct its table
+ - Some of the keys of N45 needs to be copied over to N40 (for eg K34, K38 ie file IDs between K32 to K40, since next greater node for these keys is N40, not N45 anymore)
+ - For dealing with failures we need Failure Detectors (Heartbeats, Gossip, SWIM etc)
+ 
+Stabilization Protocol:
+//Concurrent peer joins, leaves, failures might cause loopiness of pointers, & failures of lookups
+ - Chord peers periodically run a stabilization algorithm that checks and updates pointers & keys
+ - Ensures non-loopiness of fingers, eventual success of loopkups & O(logN) lookups with high probability
+ - Each stabilization round at a peer involves a constant number of messages
+ - strong stability takes O(N^2) stabilization rounds
  
  
+#### Churn
+ - could be very high, nodes constantly joining/leaving
+ - significant effect to consider
+  - Eg, traces from Overnet system show hourly peer turnover rates (churn) could be 25-100% of total number of nodes in the system
+ - Leads to excessive (unneccessary) key copying (remember keys are replicated)
+ - Stabilization algorithm may need to consume more BW to keepup
+ - Main issue is that files are replicated, while it might be sufficient to replicate only meta information about files
+ - Alternatives
+  - Introduce a level of indirection (any p2p system)
+  - replicate metadata more eg Kelips
+  
+  
+#### Virtual nodes:
+ // technique used by Chord for load-balancing
+ - DHT Hashing can get non-uniform, which can lead to bad load balancing
+ - Treat each node as multiple virtual nodes behaving independently, ie instead of calling giving it just one ID (say N1), give it mutiple IDs (N12, N13, N14 etc)
+ - Each joins the system
+ - Reduces variance of load balancing
+ 
+Wrap-up Notes:
+ - Virtual ring & consistent hashing used in Cassandra (facebook->Apache), Riak (Basho Technologies), Voldemort (linkedIn), DynamoDB (amazon) & other key-value stores
+ - Current status of Chord project
+  - File system (CFS, Ivy) built on top of chord
+  - DNS lookup service built on top of chord
+  - Internet Indirection Infrastructure (I3) project at UC Berkley
+  - Spawned research on many interesting issues about p2p systems
+  
+  
+----------
+Lecture 7:  Pastry // p2p system born out of academia // prefix matching routing
+----------
+
+ - Designed by Anthony Rowstron (Microsoft Research) & Peter Druschel (Rice University)
+ - Assigns Ids to nodes (using consistent Hashing function), just like Chord (using a virtual ring)
+ - LEAF SET - Each node knows its successor(s) & predecessor(s)
+ - Routing tables (for eg used by chord to determine neighbors - (n +2^i) mode 2^m ), instead here it uses prefix matching
+  - Think of hyper cube
+ - Thus routing is based on pre-fix matching , and is thus log(N)
+  - And hops (neighbor edges) are short (in the underlying n/w)
+  
+Pastry Routing:
+ - Consider a peer with ID 01110100101
+ - It maintains a neighbor peer with an id matching each of the following prefixes (*=starting bit differing from this peer's corresponding bit) :
+  - *
+  - 0*
+  - 01*
+  - 011*
+  - ... 0111010010*
+ - When it needs to route to a peer, say 011101 _1_ 1001, it starts by forwarding to a neighbor with the LARGEST MATCHING PREFIX, ie 011101*
+  - This results in O(logN) routing time
+  
+Pastry Locality:
+ - For each prefix, say 011*, among all potential neighbors with a matching prefix, the neighbor with the shortest RTT (round trip time) is selected.
+ - Since shorter prefix have many more candidates (spread out throughout the internet), the neighbors for shorter prefixes are likely to be closer than the neighbors for longer prefixes
+ - Thus in prefix routing, early hops are short & later hops are longer
+ - yet overall "stretch", compared to direct Internet path, stays short
+ 
+Summary of Chord & Pastry
+ - More structured than Gnutella
+ - Black Box lookup algorithms
+ - Churn handling can get complex
+ - O(logN) memory & lookup cost
+  - O(logN) lookup hops may be high
+  - can we reduce the # of hops? 
+  
+
+----------
+Lecture 8:  Kelips
+----------
+// constant lookup costs to DHT
+// It is a 1 hop Lookup DHT
+
+ - it doesn't use a virtual ring, instead uses K Affinity Groups -  K ~ sq root (N) // N=no of peers in the system
+ - Each node hashed to a group (hash mod K)
+ - Node's neighbors
+  - almost all other nodes in its affinity group
+  - one contact node per foreign affinity group
+  
+Kelips files & metadata
+ - File can be stored at any (few) node(s)
+ - Decouple file replication/location (outside Kelips) from file querying (in Kelips)
+ - Each filename hashed to a group
+  - All nodes in the group replicate pointer information ie <filename>, <file location = ip:port>
+  - affinity groups does not store files
+  
+Kelips lookups:
+ - Find file affinity group
+ - go to your contact for the affinity group
+ - failing that try another of your neighbors to find a contact
+ - Lookup = 1 hop or a few // memory cost O(sq root N)
+  - 1.93 MB for 100 K nodes, 10M files
+  - Fits in RAM of most workstations/laptops today (COTS machine)  // COTS = Components Off The Shelf
+  
+Kelips soft state:
+ // how do you update the neighbors
+ - Member lists
+  - Gossip based membership
+  - within each affinity group
+  - and also across affinity groups
+  - O(logN) dissemination time
+ - File metadata
+  - Needs to be periodically refreshed from source node
+  - Times out 
+  
+Chord Vs Pastry Vs Kelips
+ - Range off trade off availble
+  - Memory Vs lookup costs Vs background BW (to keep neighbors fresh)
+  - Kelips uses more BW, but look up time is constant. Memory is sq root (N)
+  
+What we have studied:
+ - Widely deployed p2p systems:
+  - Napster
+  - Gnutella
+  - FastTrack (kazaa, kazaalite, grokster) // proprietary
+  - Bit torrent
+ - p2p systems with provable properties:
+  - Chord // mit
+  - Pastry // rice, MSFT
+  - Kellips // cornel
 
 
 
