@@ -522,7 +522,13 @@ Week4
 ![image, width="413"](https://user-images.githubusercontent.com/29927264/62581028-c1d56300-b85c-11e9-80d5-afaeb7561626.png) 
 ![image, width="413"](https://user-images.githubusercontent.com/29927264/62581135-1842a180-b85d-11e9-9c46-e396b84a658a.png) 
 ![image, width="413"](https://user-images.githubusercontent.com/29927264/62582674-19c29880-b862-11e9-98b5-723467b30972.png) 
- 
+![image](https://user-images.githubusercontent.com/29927264/62639420-50e18a00-b8f4-11e9-8503-48fab755b148.png)
+![image](https://user-images.githubusercontent.com/29927264/62640073-9e122b80-b8f5-11e9-8eb5-f1b326823df3.png)
+![image](https://user-images.githubusercontent.com/29927264/62640113-b124fb80-b8f5-11e9-9416-d159daee779e.png)
+![image](https://user-images.githubusercontent.com/29927264/62640334-3c05f600-b8f6-11e9-90ea-c4f5582ce4b8.png)
+![image](https://user-images.githubusercontent.com/29927264/62640656-ec73fa00-b8f6-11e9-862e-86e4622d5962.png)
+![image](https://user-images.githubusercontent.com/29927264/62640850-4eccfa80-b8f7-11e9-944a-a3814e8c232c.png)
+![image](https://user-images.githubusercontent.com/29927264/62642376-6b1e6680-b8fa-11e9-962a-29e228a04bf6.png)
  
  
  
