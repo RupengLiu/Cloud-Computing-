@@ -516,11 +516,12 @@ What we have studied:
   - Pastry // rice, MSFT
   - Kellips // cornel
 
+Week4
 
-
-
-
-
+![image](https://user-images.githubusercontent.com/29927264/62580727-c4838880-b85b-11e9-9962-6b092116159f.png)
+![image](https://user-images.githubusercontent.com/29927264/62581028-c1d56300-b85c-11e9-80d5-afaeb7561626.png) 
+![image](https://user-images.githubusercontent.com/29927264/62581135-1842a180-b85d-11e9-9c46-e396b84a658a.png) 
+![image](https://user-images.githubusercontent.com/29927264/62582674-19c29880-b862-11e9-98b5-723467b30972.png) 
  
  
  
@@ -530,3 +531,4 @@ What we have studied:
 
 
 
+ 
